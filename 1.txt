@@ -1,0 +1,2 @@
+﻿=======
+ IndexWebsiteSitemap(url=http://www.cettire.com/, sub_sitemaps=[InvalidSitemap(url=http://www.cettire.com/robots.txt, reason=No parsers support sitemap from http://www.cettire.com/robots.txt)])

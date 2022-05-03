@@ -1,0 +1,11 @@
+{
+        "name": "quiz-shopconan",
+        "description": "crawl urls ,sitemaps",
+        "keywords": ["generate sitemaps"],
+        "website": "https://github.com/wanghaisheng/shop-connan",
+        "repository": "https://github.com/wanghaisheng/shop-connan",
+        "stack": "container"    
+    }
+    
+
+   
