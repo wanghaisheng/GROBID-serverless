@@ -1,11 +1,9 @@
 {
-        "name": "quiz-shopconan",
-        "description": "crawl urls ,sitemaps",
-        "keywords": ["generate sitemaps"],
-        "website": "https://github.com/wanghaisheng/shop-connan",
-        "repository": "https://github.com/wanghaisheng/shop-connan",
+        "name": "literatures-pdf-extract",
+        "description": "pdf",
+        "keywords": [" A machine learning software for extracting information from scholarly documents "],
+        "website": "https://github.com/wanghaisheng/GROBID-serverless",
+        "repository": "https://github.com/wanghaisheng/GROBID-serverless",
         "stack": "container"    
     }
     
-
-   

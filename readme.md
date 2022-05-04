@@ -17,7 +17,7 @@ https://github.com/vicogarcia16/fastapi_airtable
 
 ## Heroku
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/wanghaisheng/fastapi-docker-heroku)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/wanghaisheng/GROBID-serverless)
 
 ## Instructions
 
