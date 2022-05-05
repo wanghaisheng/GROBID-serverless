@@ -29,140 +29,40 @@ https://link-discovery.herokuapp.com/sitemap/?url=https://x.hacking8.com/
 
 
 
-#
-https://github.com/sfu-db/connector-x/discussions/270
+```python
+import scipdf
+article_dict = scipdf.parse_pdf_to_dict('example_data/futoma2017improved.pdf') # return dictionary
+ 
+# option to parse directly from URL to PDF, if as_list is set to True, output 'text' of parsed section will be in a list of paragraphs instead
+article_dict = scipdf.parse_pdf_to_dict('https://www.biorxiv.org/content/biorxiv/early/2018/11/20/463760.full.pdf', as_list=False)
 
-https://github.com/juanretamales/DataframeToDB
+# output example
+>> {
+    'title': 'Proceedings of Machine Learning for Healthcare',
+    'abstract': '...',
+    'sections': [
+        {'heading': '...', 'text': '...'},
+        {'heading': '...', 'text': '...'},
+        ...
+    ],
+    'references': [
+        {'title': '...', 'year': '...', 'journal': '...', 'author': '...'},
+        ...
+    ],
+    'figures': [
+        {'figure_label': '...', 'figure_type': '...', 'figure_id': '...', 'figure_caption': '...', 'figure_data': '...'},
+        ...
+    ],
+    'doi': '...'
+}
 
-
-
-
-import connectorx as cx
-
-postgres_url = "postgresql://username:password@server:port/database"
-query = "SELECT * FROM lineitem"
-
-cx.read_sql(postgres_url, query)
-
-
-
-
-
-import pandas as pd
-import dataframetodb
-from dataframetodb import Table, refactor
-from datetime import datetime
-import os
-
-nametable = "nameTable"
-engine = dataframetodb.create_engine('sqlite:///{}.sqlite'.format(nametable)) #create engine for use SQLAlchemy
-df = pd.read_csv("./dataset/data.csv") # Get the DataFrame
-df = refactor(df) # Returns a dataframe with the correct dtype compatible with DataframeToDB.
-table_class = Table(name=nametable, df=df) #create Table instance
-table_class.toDb(df, engine, 'append') #insert data in database, in this example sqlite
-
-
-
-$ pip install sqlmodel
-## supabase
-
-
-https://app.supabase.io/
-
-
-## firebase
-
-from flask import Flask, render_template, request, jsonify
-from firebase_admin import credentials, firestore, initialize_app
-
-app = Flask(__name__)
-# app.config['SECRET_KEY']= os.getenv('key')
-cred = credentials.Certificate('key.json')
-default_app = initialize_app(cred)
-db = firestore.client()
-
-
-links = (
-    ('/', 'Homepage'),
-    ('/add_form', 'Add new country'),
-    ('/list', 'View all countries'),
-)
-
-
-@app.route('/', methods=['GET', 'HEAD'])
-def index():
-    heading = 'Flask Country Application'
-    description = 'Flask application for countries adding and listing with Firebase.'
-    return render_template('index.html', heading=heading, description=description, links=links)
-
-
-@app.route('/add_form', methods=['GET', 'HEAD'])
-def add_form():
-    # TODO: Add Flask-WTF for form validation
-    heading = 'Add country'
-    description = 'Fill in the form and press Create butoon'
-    return render_template('add_form.html', heading=heading,
-                           description=description, links=links), 200
-
-
-@app.route('/add', methods=['POST'])
-def add_country():
-    try:
-        c = {
-            'name': request.form['name'],
-            'area': request.form['area'],
-            'population': request.form['population'],
-            'density': request.form['density'],
-        }
-        country_ref = db.collection(u'Countries').document(c['name'])
-        country_ref.set(c)
-        return render_template('success.html', country=c,
-                               heading='Country created successfully!',
-                               description='Your country was added to database',
-                               links=links), 200
-    except Exception as e:
-        return f"An Error occured: {e}"
-
-
-@app.route('/list')
-def list_all_countries():
-    try:
-        country_ref = db.collection(u'Countries')
-        # Check if ID was passed to URL query
-        # country_id = request.args.get('id')
-        # if country_id:
-        #     c = country_ref.document(country_id).get()
-        #     return jsonify(c.to_dict()), 200
-        countries = [doc.to_dict() for doc in country_ref.stream()]
-        return render_template('list.html', countries=countries,
-                                heading='All countries',
-                                description='Table displays all countries in a database',
-                                   inks=links), 200
-    except Exception as e:
-        return f"An Error Occured: {e}"
-
-
-if __name__ == '__main__':
-    app.run()
-
-
-
+xml = scipdf.parse_pdf('example_data/futoma2017improved.pdf', soup=True) # option to parse full XML from GROBID
 ```
-from pydantic import BaseModel
-from fastapi import FastAPI
-from fastapi_crudrouter import MemoryCRUDRouter as CRUDRouter
 
-class Potato(BaseModel):
-    id: int
-    color: str
-    mass: float
+To parse figures from PDF using [pdffigures2](https://github.com/allenai/pdffigures2), you can run
 
-app = FastAPI()
-app.include_router(CRUDRouter(schema=Potato))
+```python
+scipdf.parse_figures('example_data', output_folder='figures') # folder should contain only PDF files
 ```
-https://github.com/awtkns/fastapi-crudrouter
 
-
-
-https://github.com/tokusumi/fastapi-cloudauth
-
+You can see example output figures in `figures` folder.

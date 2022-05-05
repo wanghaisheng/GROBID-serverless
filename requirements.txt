@@ -5,15 +5,10 @@ pywebio
 pywebio_battery
 aiofiles
 websockets
-advertools
 pandas
-dataframetodb
-connectorx
-shot-scraper
 click
 sqlmodel
 supabase
 python-dotenv
 fastapi-crudrouter
 fastapi-cloudauth
-ultimate-sitemap-parser

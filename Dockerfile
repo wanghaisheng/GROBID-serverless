@@ -117,6 +117,8 @@ RUN ln -s /opt/grobid /opt/delft
 RUN mkdir delft
 RUN cp ./resources-registry.json delft/
 
+RUN pip install git+https://github.com/titipata/scipdf_parser
+RUN python -m spacy download en_core_web_sm
 CMD ["./grobid-service/bin/grobid-service"]
 
 ARG GROBID_VERSION
